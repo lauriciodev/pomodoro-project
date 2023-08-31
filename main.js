@@ -24,15 +24,18 @@ class Pomodoro {
   }
 
   startProd(time) {
-    time = time - 1;
+    time--;
     var prodInter = setInterval(() => {
       this.seconds--;
-      if (this.seconds === 0) {
-        if (time === 0 && this.seconds === 0) {
-          this.isRunning = false;
+      if (this.seconds <= 0) {
+        if (time <= 0 && this.seconds === 0) {
+          time = 0;
           clearInterval(prodInter);
+
+          this.isRunning = false;
           this.start();
           this.seconds = 60;
+          return;
         }
         time--;
         this.seconds = 60;
@@ -43,19 +46,21 @@ class Pomodoro {
   }
 
   startFree(time) {
-    time = time - 1;
-
+    time--;
     var freeInter = setInterval(() => {
       this.seconds--;
-      if (this.seconds === 0) {
-        if (time === 0 && this.seconds === 0) {
-          this.isRunning = true;
+      if (this.seconds <= 0) {
+        if (time <= 0 && this.seconds === 0) {
+          time = 0;
           clearInterval(freeInter);
+          this.isRunning = true;
           this.start();
-          this.seconds = 3;
+          this.seconds = 60;
+
+          return;
         }
         time--;
-        this.seconds = 3;
+        this.seconds = 60;
         return;
       }
       this.showTime(time, this.seconds);
@@ -66,7 +71,6 @@ class Pomodoro {
     if (this.isRunning) {
       this.startProd(this.timeProd);
       this.songStart.play();
-
       return;
     }
 
@@ -75,5 +79,5 @@ class Pomodoro {
   }
 }
 
-const pomo = new Pomodoro(1, 1);
+const pomo = new Pomodoro(2, 2);
 pomo.start();
