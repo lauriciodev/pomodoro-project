@@ -3,7 +3,7 @@ class Pomodoro {
     this.timeProd = prod;
     this.freeTime = free;
     this.isRunning = true;
-    this.seconds = 5;
+    this.seconds = 60;
     this.freeInter = null;
     this.prodInter = null;
     this.element = document.getElementById("time");
@@ -26,19 +26,17 @@ class Pomodoro {
   }
 
   startProd(time) {
-    this.prodInter = setInterval(() => {
+    var prodInter = setInterval(() => {
       this.seconds--;
       if (this.seconds === 0) {
         if (time === 0 && this.seconds === 0) {
           this.isRunning = false;
-          this.stopInterval(this.prodInter);
-
+          clearInterval(prodInter);
           this.start();
-          this.seconds = 5;
-          return;
+          this.seconds = 60;
         }
         time--;
-        this.seconds = 5;
+        this.seconds = 60;
         return;
       }
       this.showTime(time, this.seconds);
@@ -46,19 +44,17 @@ class Pomodoro {
   }
 
   startFree(time) {
-    this.freeInter = setInterval(() => {
+    var freeInter = setInterval(() => {
       this.seconds--;
       if (this.seconds === 0) {
         if (time === 0 && this.seconds === 0) {
           this.isRunning = true;
-          this.stopInterval(this.freeInter);
-
+          clearInterval(freeInter);
           this.start();
-          this.seconds = 5;
-          return;
+          this.seconds = 3;
         }
         time--;
-        this.seconds = 5;
+        this.seconds = 3;
         return;
       }
       this.showTime(time, this.seconds);
@@ -72,16 +68,15 @@ class Pomodoro {
   start() {
     if (this.isRunning) {
       this.startProd(this.timeProd - 1);
-      this.seconds = 5;
+      this.seconds = 60;
       this.songStart.play();
-
       return;
     }
     this.startFree(this.freeTime - 1);
-    this.seconds = 5;
+    this.seconds = 60;
     this.songFree.play();
   }
 }
 
-const pomo = new Pomodoro(10, 5);
+const pomo = new Pomodoro(25, 10);
 pomo.start();
