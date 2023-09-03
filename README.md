@@ -1,5 +1,13 @@
 # pomodoro-js-puro
+
 pomodoro usando javascript puro
 
+// funcionalidades
 
-codando mobile
+tempo de estudo ok
+tempo de descanso ok
+play/pause
+restart
+inputs para tempos
+localstorage
+integrar lista de tarefas
