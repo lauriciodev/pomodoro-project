@@ -1,19 +1,17 @@
-# pomodoro-js-puro
-
-pomodoro usando javascript puro
+# pomodoro usando javascript puro
 
 ## funcionalidades
 
-# tempo de estudo ok
+### tempo de estudo ok
 
-# tempo de descanso ok
+### tempo de descanso ok
 
-# play/pause
+### play/pause
 
-# restart
+### restart
 
-# inputs para tempos
+### inputs para tempos
 
-# localstorage
+### localstorage
 
-# integrar lista de tarefas
+### integrar lista de tarefas
