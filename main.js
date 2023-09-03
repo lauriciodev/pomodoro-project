@@ -3,7 +3,9 @@ class Pomodoro {
     this.timeProd = prod;
     this.freeTime = free;
     this.isRunning = true;
-    this.seconds = 60;
+    this.seconds = 5;
+    this.freeInter = null;
+    this.prodInter = null;
     this.element = document.getElementById("time");
     this.elementStatus = document.getElementById("status");
     this.songFree = document.getElementById("free");
@@ -24,18 +26,19 @@ class Pomodoro {
   }
 
   startProd(time) {
-    time = time - 1;
-    var prodInter = setInterval(() => {
+    this.prodInter = setInterval(() => {
       this.seconds--;
       if (this.seconds === 0) {
         if (time === 0 && this.seconds === 0) {
           this.isRunning = false;
-          clearInterval(prodInter);
+          this.stopInterval(this.prodInter);
+
           this.start();
-          this.seconds = 60;
+          this.seconds = 5;
+          return;
         }
         time--;
-        this.seconds = 60;
+        this.seconds = 5;
         return;
       }
       this.showTime(time, this.seconds);
@@ -43,37 +46,42 @@ class Pomodoro {
   }
 
   startFree(time) {
-    time = time - 1;
-
-    var freeInter = setInterval(() => {
+    this.freeInter = setInterval(() => {
       this.seconds--;
       if (this.seconds === 0) {
         if (time === 0 && this.seconds === 0) {
           this.isRunning = true;
-          clearInterval(freeInter);
+          this.stopInterval(this.freeInter);
+
           this.start();
-          this.seconds = 3;
+          this.seconds = 5;
+          return;
         }
         time--;
-        this.seconds = 3;
+        this.seconds = 5;
         return;
       }
       this.showTime(time, this.seconds);
     }, 1000);
   }
 
+  stopInterval(interval) {
+    clearInterval(interval);
+  }
+
   start() {
     if (this.isRunning) {
-      this.startProd(this.timeProd);
+      this.startProd(this.timeProd - 1);
+      this.seconds = 5;
       this.songStart.play();
 
       return;
     }
-
-    this.startFree(this.freeTime);
+    this.startFree(this.freeTime - 1);
+    this.seconds = 5;
     this.songFree.play();
   }
 }
 
-const pomo = new Pomodoro(1, 1);
+const pomo = new Pomodoro(10, 5);
 pomo.start();
