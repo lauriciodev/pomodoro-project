@@ -3,13 +3,17 @@ class Pomodoro {
     this.timeProd = prod;
     this.freeTime = free;
     this.isRunning = true;
-    this.seconds = 3;
+    this.seconds = 6;
     this.freeInter = null;
     this.prodInter = null;
     this.element = document.getElementById("time");
     this.elementStatus = document.getElementById("status");
     this.songFree = document.getElementById("free");
     this.songStart = document.getElementById("start");
+    this.currentTime = {
+      min: 0,
+      sec: 0,
+    };
   }
 
   showTime(minutes, seconds) {
@@ -33,14 +37,20 @@ class Pomodoro {
           this.isRunning = false;
           clearInterval(this.prodInter);
           this.start();
-          this.seconds = 3;
+          this.seconds = 6;
         }
         time--;
-        this.seconds = 3;
+        this.seconds = 6;
         return;
       }
+      this.setCurrentTime(time, this.seconds);
       this.showTime(time, this.seconds);
     }, 1000);
+  }
+
+  setCurrentTime(min, sec) {
+    this.currentTime.min = min;
+    this.currentTime.sec = sec;
   }
 
   startFree(time) {
@@ -51,12 +61,13 @@ class Pomodoro {
           this.isRunning = true;
           clearInterval(this.freeInter);
           this.start();
-          this.seconds = 3;
+          this.seconds = 6;
         }
         time--;
-        this.seconds = 3;
+        this.seconds = 6;
         return;
       }
+      this.setCurrentTime(time, this.seconds);
       this.showTime(time, this.seconds);
     }, 1000);
   }
@@ -68,12 +79,12 @@ class Pomodoro {
   start() {
     if (this.isRunning) {
       this.startProd(this.timeProd - 1);
-      this.seconds = 3;
+      this.seconds = 6;
       this.songStart.play();
       return;
     }
     this.startFree(this.freeTime - 1);
-    this.seconds = 3;
+    this.seconds = 6;
     this.songFree.play();
   }
 }
@@ -86,7 +97,6 @@ class PomodoroControl {
     this.buttonStartPause = document.getElementById("start-pause-btn");
     this.buttonRestart = document.getElementById("restart-btn");
     this.isRunning = false;
-    this.currentTime = null;
     this.startPause();
   }
 
@@ -99,18 +109,22 @@ class PomodoroControl {
     this.buttonStartPause.addEventListener("click", () => {
       if (this.isRunning) {
         this.pomodoro.stopInterval(this.pomodoro.prodInter);
+        console.log(
+          `${this.pomodoro.currentTime.min}: ${this.pomodoro.currentTime.sec}`
+        );
         this.isRunning = false;
-        this.currentTime = this.pomodoro.timeProd;
         return;
       }
 
-      this.pomodoro.timeProd = this.currentTime;
+      this.pomodoro.timeProd = this.pomodoro.currentTime.min + 1;
+      this.pomodoro.seconds = this.pomodoro.currentTime.sec + 1;
+
       this.startMyapp();
       return;
     });
   }
 }
 
-const pomo = new Pomodoro(2, 2);
+const pomo = new Pomodoro(10, 12);
 const control = new PomodoroControl(pomo);
 control.startMyapp();
