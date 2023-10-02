@@ -3,7 +3,7 @@ class Pomodoro {
     this.timeProd = prod;
     this.freeTime = free;
     this.isRunning = true;
-    this.seconds = 6;
+    this.seconds = 10;
     this.freeInter = null;
     this.prodInter = null;
     this.element = document.getElementById("time");
@@ -19,7 +19,7 @@ class Pomodoro {
   showTime(minutes, seconds) {
     if (this.isRunning) {
       this.elementStatus.innerHTML = "Hora de estuadar !";
-      this.elementStatus.style.backgroundColor = "#4a6ec1";
+      this.elementStatus.style.backgroundColor = "#4a10ec1";
     } else {
       this.elementStatus.innerHTML = "Descanse um puco";
       this.elementStatus.style.backgroundColor = "green";
@@ -37,10 +37,10 @@ class Pomodoro {
           this.isRunning = false;
           clearInterval(this.prodInter);
           this.start();
-          this.seconds = 6;
+          this.seconds = 10;
         }
         time--;
-        this.seconds = 6;
+        this.seconds = 10;
         return;
       }
       this.setCurrentTime(time, this.seconds);
@@ -61,10 +61,10 @@ class Pomodoro {
           this.isRunning = true;
           clearInterval(this.freeInter);
           this.start();
-          this.seconds = 6;
+          this.seconds = 10;
         }
         time--;
-        this.seconds = 6;
+        this.seconds = 10;
         return;
       }
       this.setCurrentTime(time, this.seconds);
@@ -79,12 +79,10 @@ class Pomodoro {
   start() {
     if (this.isRunning) {
       this.startProd(this.timeProd - 1);
-      this.seconds = 6;
       this.songStart.play();
       return;
     }
     this.startFree(this.freeTime - 1);
-    this.seconds = 6;
     this.songFree.play();
   }
 }
@@ -106,6 +104,14 @@ class PomodoroControl {
   }
 
   startPause() {
+    if (!this.pomodoro.isRunning) {
+      this.buttonStartPause.style.backgroundColor = "red";
+      console.log("teste");
+    } else {
+      this.buttonStartPause.style.backgroundColor = "blue";
+      console.log("teste");
+    }
+
     this.buttonStartPause.addEventListener("click", () => {
       if (this.isRunning) {
         this.pomodoro.stopInterval(this.pomodoro.prodInter);
@@ -125,6 +131,6 @@ class PomodoroControl {
   }
 }
 
-const pomo = new Pomodoro(10, 12);
+const pomo = new Pomodoro(3, 3);
 const control = new PomodoroControl(pomo);
 control.startMyapp();
