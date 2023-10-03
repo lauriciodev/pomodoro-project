@@ -10,6 +10,7 @@ class Pomodoro {
     this.elementStatus = document.getElementById("status");
     this.songFree = document.getElementById("free");
     this.songStart = document.getElementById("start");
+    this.buttonStartPause = document.getElementById("start-pause-btn");
     this.currentTime = {
       min: 0,
       sec: 0,
@@ -21,7 +22,7 @@ class Pomodoro {
       this.elementStatus.innerHTML = "Hora de estuadar !";
       this.elementStatus.style.backgroundColor = "#4a10ec1";
     } else {
-      this.elementStatus.innerHTML = "Descanse um puco";
+      this.elementStatus.innerHTML = "Descanse";
       this.elementStatus.style.backgroundColor = "green";
     }
     this.element.innerHTML = `${minutes < 10 ? "0" + minutes : minutes} :  ${
@@ -30,6 +31,7 @@ class Pomodoro {
   }
 
   startProd(time) {
+    this.buttonStartPause.removeAttribute("disabled");
     this.prodInter = setInterval(() => {
       this.seconds--;
       if (this.seconds === 0) {
@@ -54,6 +56,7 @@ class Pomodoro {
   }
 
   startFree(time) {
+    this.buttonStartPause.setAttribute("disabled", "true");
     this.freeInter = setInterval(() => {
       this.seconds--;
       if (this.seconds === 0) {
@@ -104,20 +107,10 @@ class PomodoroControl {
   }
 
   startPause() {
-    if (!this.pomodoro.isRunning) {
-      this.buttonStartPause.style.backgroundColor = "red";
-      console.log("teste");
-    } else {
-      this.buttonStartPause.style.backgroundColor = "blue";
-      console.log("teste");
-    }
-
     this.buttonStartPause.addEventListener("click", () => {
       if (this.isRunning) {
         this.pomodoro.stopInterval(this.pomodoro.prodInter);
-        console.log(
-          `${this.pomodoro.currentTime.min}: ${this.pomodoro.currentTime.sec}`
-        );
+
         this.isRunning = false;
         return;
       }
@@ -131,6 +124,6 @@ class PomodoroControl {
   }
 }
 
-const pomo = new Pomodoro(3, 3);
+const pomo = new Pomodoro(2, 2);
 const control = new PomodoroControl(pomo);
 control.startMyapp();
