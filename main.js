@@ -20,10 +20,10 @@ class Pomodoro {
   showTime(minutes, seconds) {
     if (this.isRunning) {
       this.elementStatus.innerHTML = "Hora de estuadar !";
-      this.elementStatus.style.backgroundColor = "#4a10ec1";
+      this.elementStatus.style.backgroundColor = "rgb(1, 42, 35)";
     } else {
       this.elementStatus.innerHTML = "Descanse";
-      this.elementStatus.style.backgroundColor = "green";
+      this.elementStatus.style.backgroundColor = "rgb(12, 24, 123)";
     }
     this.element.innerHTML = `${minutes < 10 ? "0" + minutes : minutes} :  ${
       seconds < 10 ? "0" + seconds : seconds
