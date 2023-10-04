@@ -20,10 +20,10 @@ class Pomodoro {
   showTime(minutes, seconds) {
     if (this.isRunning) {
       this.elementStatus.innerHTML = "Hora de estuadar !";
-      this.elementStatus.style.backgroundColor = "rgb(1, 42, 35)";
+      this.elementStatus.style.backgroundColor = "#2a27ae;";
     } else {
       this.elementStatus.innerHTML = "Descanse";
-      this.elementStatus.style.backgroundColor = "rgb(12, 24, 123)";
+      this.elementStatus.style.backgroundColor = "#072b27;";
     }
     this.element.innerHTML = `${minutes < 10 ? "0" + minutes : minutes} :  ${
       seconds < 10 ? "0" + seconds : seconds
@@ -31,6 +31,7 @@ class Pomodoro {
   }
 
   startProd(time) {
+    this.songStart.play();
     this.buttonStartPause.removeAttribute("disabled");
     this.prodInter = setInterval(() => {
       this.seconds--;
@@ -56,6 +57,7 @@ class Pomodoro {
   }
 
   startFree(time) {
+    this.songFree.play();
     this.buttonStartPause.setAttribute("disabled", "true");
     this.freeInter = setInterval(() => {
       this.seconds--;
@@ -82,11 +84,9 @@ class Pomodoro {
   start() {
     if (this.isRunning) {
       this.startProd(this.timeProd - 1);
-      this.songStart.play();
       return;
     }
     this.startFree(this.freeTime - 1);
-    this.songFree.play();
   }
 }
 

@@ -13,35 +13,37 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <style>
+    body {
+      background-color: #275950;
+    }
     .container {
       max-width: 600px;
+      padding: 10px;
       height: 380px;
-      border: 1px solid rgba(0, 0, 0, 0.418);
-      box-shadow: 2px 4px 4px #3c3c3c;
       text-align: center;
-      background-color: rgb(18, 64, 107);
+      background-color: #41bfb3;
       border-radius: 10px;
       margin: 20px auto;
     }
 
     #time {
       font-size: 4.8rem;
-      color: rgb(11, 27, 51);
+      color: #ffffff;
       transition: all 0.9s;
-      background-color: rgb(214, 241, 236);
+      background-color: #07463f;
     }
     #status {
       font-size: 2.8rem;
-      color: white;
+      color: #d6cbcb;
       transition: all 0.9s;
-      background-color: rgb(1, 43, 35);
+      background-color: #24867d;
     }
     #start-pause-btn {
       font-size: 1.1rem;
-      color: aliceblue;
-      background-color: rgb(18, 64, 107);
+      color: #ffffff;
+      background-color: #24867d;
 
-      border: 1px solid rgb(197, 222, 255);
+      border: 1px solid #1c5751;
       transition: all 0.9s;
       padding: 4px;
       cursor: pointer;
@@ -50,26 +52,27 @@
     #start-pause-btn:disabled {
       background-color: rgba(39, 39, 39, 0.274);
       border: none;
-      color: #3c3c3c2f;
+      color: #26010159;
       cursor: wait;
     }
 
     #start-pause-btn:hover {
-      background-color: rgb(49, 0, 65);
+      background-color: rgb(0, 61, 65);
     }
 
     #restart-btn {
-      padding: 4px;
       font-size: 1.1rem;
-      color: aliceblue;
-      background-color: rgb(2, 17, 58);
-      border: 1px solid rgb(79, 148, 238);
+      color: #ffffff;
+      background-color: #0b4c4e;
 
-      border-radius: 10px;
+      border: 1px solid #1c5751;
+      transition: all 0.9s;
+      padding: 4px;
+      cursor: pointer;
     }
 
     #restart-btn:hover {
-      background-color: rgb(0, 2, 97);
+      background-color: rgb(2, 58, 53);
     }
   </style>
 
