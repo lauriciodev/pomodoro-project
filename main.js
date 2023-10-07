@@ -101,11 +101,6 @@ class PomodoroControl {
     this.startPause();
   }
 
-  startMyapp() {
-    this.pomodoro.start();
-    this.isRunning = true;
-  }
-
   startPause() {
     this.buttonStartPause.addEventListener("click", () => {
       if (this.isRunning) {
@@ -118,12 +113,11 @@ class PomodoroControl {
       this.pomodoro.timeProd = this.pomodoro.currentTime.min + 1;
       this.pomodoro.seconds = this.pomodoro.currentTime.sec + 1;
 
-      this.startMyapp();
-      return;
+      this.pomodoro.start();
+      console.log(this.pomodoro.isRunning);
     });
   }
 }
 
 const pomo = new Pomodoro(2, 2);
 const control = new PomodoroControl(pomo);
-control.startMyapp();
