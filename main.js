@@ -12,8 +12,8 @@ class Pomodoro {
     this.songStart = document.getElementById("start");
     this.buttonStartPause = document.getElementById("start-pause-btn");
     this.currentTime = {
-      min: 0,
-      sec: 0,
+      min: prod,
+      sec: 10,
     };
   }
 
@@ -82,11 +82,11 @@ class Pomodoro {
   }
 
   start() {
-    if (this.isRunning) {
-      this.startProd(this.timeProd - 1);
+    if (!this.isRunning) {
+      this.startFree(this.timeProd - 1);
       return;
     }
-    this.startFree(this.freeTime - 1);
+    this.startProd(this.freeTime - 1);
   }
 }
 
@@ -99,6 +99,12 @@ class PomodoroControl {
     this.buttonRestart = document.getElementById("restart-btn");
     this.isRunning = false;
     this.startPause();
+    this.reset();
+  }
+
+  startMyApp() {
+    this.pomodoro.start();
+    this.isRunning = true;
   }
 
   startPause() {
@@ -112,9 +118,14 @@ class PomodoroControl {
 
       this.pomodoro.timeProd = this.pomodoro.currentTime.min + 1;
       this.pomodoro.seconds = this.pomodoro.currentTime.sec + 1;
+      this.startMyApp();
+    });
+  }
 
-      this.pomodoro.start();
-      console.log(this.pomodoro.isRunning);
+  reset() {
+    this.buttonRestart.addEventListener("click", () => {
+      console.log(this.pomodoro.timeProd);
+      console.log(this.pomodoro.seconds);
     });
   }
 }
