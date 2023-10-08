@@ -130,5 +130,5 @@ class PomodoroControl {
   }
 }
 
-const pomo = new Pomodoro(2, 2);
+const pomo = new Pomodoro(30, 5);
 const control = new PomodoroControl(pomo);
