@@ -3,7 +3,7 @@ class Pomodoro {
     this.timeProd = prod;
     this.freeTime = free;
     this.isRunning = true;
-    this.seconds = 60;
+    this.seconds = 5;
     this.freeInter = null;
     this.prodInter = null;
     this.element = document.getElementById("time");
@@ -13,17 +13,17 @@ class Pomodoro {
     this.buttonStartPause = document.getElementById("start-pause-btn");
     this.currentTime = {
       min: prod,
-      sec: 60,
+      sec: 5,
     };
   }
 
   showTime(minutes, seconds) {
     if (this.isRunning) {
       this.elementStatus.innerHTML = "Estude!";
-      this.elementStatus.style.backgroundColor = "#2a27ae;";
+      this.elementStatus.style.backgroundColor = "#2a27ae";
     } else {
       this.elementStatus.innerHTML = "Descanse";
-      this.elementStatus.style.backgroundColor = "#072b27;";
+      this.elementStatus.style.backgroundColor = "#072b27";
     }
     this.element.innerHTML = `${minutes < 10 ? "0" + minutes : minutes} :  ${
       seconds < 10 ? "0" + seconds : seconds
@@ -40,10 +40,10 @@ class Pomodoro {
           this.isRunning = false;
           clearInterval(this.prodInter);
           this.start();
-          this.seconds = 60;
+          this.seconds = 5;
         }
         time--;
-        this.seconds = 60;
+        this.seconds = 5;
         return;
       }
       this.setCurrentTime(time, this.seconds);
@@ -66,10 +66,10 @@ class Pomodoro {
           this.isRunning = true;
           clearInterval(this.freeInter);
           this.start();
-          this.seconds = 60;
+          this.seconds = 5;
         }
         time--;
-        this.seconds = 60;
+        this.seconds = 5;
         return;
       }
       this.setCurrentTime(time, this.seconds);
@@ -83,7 +83,7 @@ class Pomodoro {
 
   start() {
     if (!this.isRunning) {
-      this.startFree(this.freeProd - 1);
+      this.startFree(this.freeTime - 1);
       return;
     }
     this.startProd(this.timeProd - 1);
@@ -130,5 +130,5 @@ class PomodoroControl {
   }
 }
 
-const pomo = new Pomodoro(30, 5);
+const pomo = new Pomodoro(1, 1);
 const control = new PomodoroControl(pomo);
