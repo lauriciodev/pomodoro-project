@@ -11,6 +11,7 @@ class Pomodoro {
     this.songFree = document.getElementById("free");
     this.songStart = document.getElementById("start");
     this.buttonStartPause = document.getElementById("start-pause-btn");
+    this.buttonRestart = document.getElementById("restart-btn");
     this.currentTime = {
       min: prod,
       sec: 10,
@@ -27,13 +28,14 @@ class Pomodoro {
       this.elementStatus.innerHTML = "Descanse";
       this.elementStatus.style.backgroundColor = "#072b27";
     }
-    this.element.innerHTML = `${minutes - 1 < 10 ? "0" + minutes : minutes - 1} :  ${
+    this.element.innerHTML = `${minutes < 10 ? "0" + minutes : minutes} :  ${
       seconds < 10 ? "0" + seconds : seconds
     }`;
   }
 
   //responsavel por inciar o tempo de produção
   startProd(time) {
+    time--
     this.songStart.play();
     this.buttonStartPause.removeAttribute("disabled");
     this.buttonRestart.removeAttribute("disabled");
@@ -64,6 +66,7 @@ class Pomodoro {
   // responsavel por iniciar o tempo de descanso
   startFree(time) {
     this.songFree.play();
+    time--
     this.buttonStartPause.setAttribute("disabled", "true");
     this.buttonRestart.setAttribute("disabled", "true");
     this.freeInter = setInterval(() => {
@@ -143,5 +146,8 @@ class PomodoroControl {
   }
 }
 
-const pomo = new Pomodoro(2, 10);
+const prod = prompt("Insira o tempo para estudo");
+const free = prompt("Insira o tempo para descanso")
+
+const pomo = new Pomodoro(prod, free);
 const control = new PomodoroControl(pomo);
