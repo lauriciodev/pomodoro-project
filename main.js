@@ -3,7 +3,7 @@ class Pomodoro {
     this.timeProd = prod;
     this.freeTime = free;
     this.isRunning = true;
-    this.seconds = 10;
+    this.seconds = 60;
     this.freeInter = null;
     this.prodInter = null;
     this.element = document.getElementById("time");
@@ -14,7 +14,7 @@ class Pomodoro {
     this.buttonRestart = document.getElementById("restart-btn");
     this.currentTime = {
       min: prod,
-      sec: 10,
+      sec: 60,
     };
 
   }
@@ -46,10 +46,10 @@ class Pomodoro {
           this.isRunning = false;
           clearInterval(this.prodInter);
           this.start();
-          this.seconds = 10;
+          this.seconds = 60;
         }
         time--;
-        this.seconds = 10;
+        this.seconds = 60;
         return;
       }
       this.setCurrentTime(time, this.seconds);
@@ -76,10 +76,10 @@ class Pomodoro {
           this.isRunning = true;
           clearInterval(this.freeInter);
           this.start();
-          this.seconds = 10;
+          this.seconds = 60;
         }
         time--;
-        this.seconds = 10;
+        this.seconds = 60;
         return;
       }
       this.setCurrentTime(time, this.seconds);
