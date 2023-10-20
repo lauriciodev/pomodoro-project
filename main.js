@@ -1,7 +1,7 @@
 class Pomodoro {
   constructor(prod, free) {
-    this.timeProd = prod - 1;
-    this.freeTime = free - 1;
+    this.timeProd = prod;
+    this.freeTime = free;
     this.isRunning = true;
     this.seconds = 60;
     this.freeInter = null;
@@ -11,10 +11,12 @@ class Pomodoro {
     this.songFree = document.getElementById("free");
     this.songStart = document.getElementById("start");
     this.buttonStartPause = document.getElementById("start-pause-btn");
+    this.buttonRestart = document.getElementById("restart-btn");
     this.currentTime = {
       min: prod,
       sec: 60,
     };
+
   }
 
   // responsavel por mostrar o tempo na tela
@@ -33,8 +35,10 @@ class Pomodoro {
 
   //responsavel por inciar o tempo de produção
   startProd(time) {
+    time--
     this.songStart.play();
     this.buttonStartPause.removeAttribute("disabled");
+    this.buttonRestart.removeAttribute("disabled");
     this.prodInter = setInterval(() => {
       this.seconds--;
       if (this.seconds === 0) {
@@ -62,7 +66,9 @@ class Pomodoro {
   // responsavel por iniciar o tempo de descanso
   startFree(time) {
     this.songFree.play();
+    time--
     this.buttonStartPause.setAttribute("disabled", "true");
+    this.buttonRestart.setAttribute("disabled", "true");
     this.freeInter = setInterval(() => {
       this.seconds--;
       if (this.seconds === 0) {
@@ -108,19 +114,23 @@ class PomodoroControl {
   }
 
   startMyApp() {
-    this.pomodoro.start();
+    this.pomodoro.startProd(this.pomodoro.timeProd);
     this.isRunning = true;
   }
 
   startPause() {
     this.buttonStartPause.addEventListener("click", () => {
       if (this.isRunning) {
+      this.buttonRestart.setAttribute("disabled", "true");
+      this.buttonRestart.style.backgroundColor = "red";
         this.pomodoro.stopInterval(this.pomodoro.prodInter);
         this.buttonStartPause.style.backgroundColor = "red";
         this.isRunning = false;
         return;
       }
 
+      this.buttonRestart.removeAttribute("disabled");
+      this.buttonRestart.style.backgroundColor = "#009c53";
       this.pomodoro.timeProd = this.pomodoro.currentTime.min;
       this.pomodoro.seconds = this.pomodoro.currentTime.sec;
       this.buttonStartPause.style.backgroundColor = "#009c53";
@@ -136,5 +146,8 @@ class PomodoroControl {
   }
 }
 
-const pomo = new Pomodoro(60, 10);
+const prod = prompt("Insira o tempo para estudo");
+const free = prompt("Insira o tempo para descanso")
+
+const pomo = new Pomodoro(prod, free);
 const control = new PomodoroControl(pomo);
