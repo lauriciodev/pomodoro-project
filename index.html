@@ -1,99 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Doro</title>
-
-    <!-- HTML -->
-
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/svg+xml" href="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pomodoro Project</title>
   </head>
-  <style>
-    body {
-      background-color: #275950;
-    }
-    .container {
-      max-width: 600px;
-      padding: 10px;
-      height: 380px;
-      text-align: center;
-      background-color: #41bfb3;
-      border-radius: 10px;
-      margin: 20px auto;
-    }
-
-    #time {
-      font-size: 4.8rem;
-      color: #ffffff;
-      transition: all 0.9s;
-      background-color: #07463f;
-    }
-    #status {
-      font-size: 2.8rem;
-      color: #d6cbcb;
-      transition: all 0.9s;
-    }
-    #start-pause-btn {
-      font-size: 1.1rem;
-      color: #ffffff;
-      background-color: #24867d;
-
-      border: 1px solid #1c5751;
-      transition: all 0.9s;
-      padding: 4px;
-      cursor: pointer;
-    }
-
-    #start-pause-btn:disabled {
-      background-color: rgba(39, 39, 39, 0.274);
-      border: none;
-      color: #26010159;
-      cursor: wait;
-    }
-
-     #restart-btn:disabled {
-      background-color: rgba(39, 39, 39, 0.274);
-      border: none;
-      color: #26010159;
-      cursor: wait;
-    }
-
-    #start-pause-btn:hover {
-      background-color: rgb(0, 61, 65);
-    }
-
-    #restart-btn {
-      font-size: 1.1rem;
-      color: #ffffff;
-      background-color: #009c53;
-
-      border: 1px solid #1c5751;
-      transition: all 0.9s;
-      padding: 4px;
-      cursor: pointer;
-    }
-
-    #restart-btn:hover {
-      background-color: rgb(2, 58, 53);
-    }
-  </style>
-
   <body>
-    <div class="container">
-      <p id="status"></p>
-      <p id="time"></p>
-      <button id="start-pause-btn">Iniciar/Parar</button>
-      <button id="restart-btn">Reiniciar</button>
-    </div>
-
-    <audio src="assets/songs/start.mp3" id="free"></audio>
-    <audio src="assets/songs/free.mp3" id="start"></audio>
-
-    <!-- Project -->
-    <script src="main.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
