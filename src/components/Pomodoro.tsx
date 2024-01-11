@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useInterval } from '../hooks/useIterval';
-import { convertTime } from '../utils/convertTime';
 import Button from './button';
+import Timer from './timer';
 
 interface typeProps{
   defaultPomodoroType:number
@@ -15,8 +15,9 @@ setMainTime(mainTime -1)
 }, 1000)
 
 return (
-  <div>
-<h2>pomodoro timer {convertTime(mainTime)} </h2>
+  <div className='pomodoro'>
+    <h4>Você está: em ação</h4>
+    <Timer mainTime={mainTime}/>
    <Button className='button' clickFunction={() =>{
     console.log("lauricio");
    }} text='Parar'/>

@@ -1,12 +1,12 @@
 interface PropType{
-clickFunction:() => void;
+clickFunction?:() => void;
   text:string;
-  className:string;
+  className?:string;
 }
 
 function Button(props:PropType): JSX.Element {
 
-  return <button onClick={() => props.clickFunction()}>{props.text}</button>
+  return <button onClick={props.clickFunction} className={props.className}>{props.text}</button>
 }
 
 
