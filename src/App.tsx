@@ -1,9 +1,12 @@
-import Pomo from './components/Pomodoro'
+import Pomo from './components/Pomodoro';
+
 function App() {
 
   return (
-  <div>
-    <Pomo defaultPomodoroType={500}/>
+   <div className='container'> 
+    <Pomo pomodoroTime={500}
+    shortTime={500}
+    longTime={500}/>
   </div>
   )
 }
