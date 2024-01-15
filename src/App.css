@@ -45,6 +45,10 @@ display: none;
   background-color: rgb(124, 22, 22);
   color: white;
 } 
+.working .container .controls .button:hover{
+  background-color: rgb(90, 8, 8);
+  color: white;
+} 
 
 
 .container .controls .button{
@@ -57,7 +61,18 @@ display: none;
 
 .container .controls .button:hover{
   background-color: rgb(5, 136, 136);
+}
 
+.container .notes__container{
+  padding: 10px;
+  margin-top: 20px;
+  background-color: aqua;
+}
+.working .container .notes__container{
+  padding: 10px;
+  margin-top: 20px;
+  background-color: rgb(116, 13, 6);
+  color: white;
 }
 
 body{

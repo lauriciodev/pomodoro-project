@@ -5,8 +5,8 @@ function App() {
   return (
    <div className='container'> 
     <Pomo pomodoroTime={500}
-    shortTime={500}
-    longTime={500}/>
+    shortTime={200}
+    longTime={300}/>
   </div>
   )
 }
