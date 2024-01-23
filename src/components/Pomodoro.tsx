@@ -56,7 +56,7 @@ return (
     <div className="controls">
     <Button className='button' clickFunction={() => configureTime()} text='Trabalho'/>
    <Button className='button' clickFunction={() => configureRestingTime(true)} text='Descanso'/>
-   <Button className='button' clickFunction={() => setRunning(!running) } text={
+   <Button className={!working && !resting ? "hidden": "button"} clickFunction={() => setRunning(!running) } text={
     running ? "Pause" : "Play"
    }/>
     </div>
