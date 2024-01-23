@@ -33,7 +33,9 @@ setMainTime(mainTime -1)
 const configureTime = () =>{
   setRunning(true);
   setWorking(true);
-  setMainTime(mainTime)
+  setResting(false);
+
+  setMainTime(props.pomodoroTime)
 }
 
 const configureRestingTime = (isLongTime:boolean) =>{
