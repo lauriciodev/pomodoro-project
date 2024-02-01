@@ -13,6 +13,7 @@ interface typeProps{
   pomodoroTime:number;
   shortTime:number;
   longTime:number;
+  cycles:number;
 }
 
 function Pomo(props:typeProps) {
@@ -20,12 +21,30 @@ const [mainTime, setMainTime] = useState(props.pomodoroTime);
 const [running, setRunning] = useState(false);
 const [working, setWorking] = useState(false);
 const [resting, setResting] = useState(false);
+const [cycles, setCycles] = useState(
+  new Array(props.cycles -1).fill(true)
+)
+const [cyclesQtd, setCyclesQtd] = useState(0);
 
 const finish = new Audio(finishSong);
 const start = new Audio(startSong);
 const pause = new Audio(pauseSong);
 
+const configureRestingTime = (isLongTime:boolean) =>{
+  setRunning(true);
+  setResting(true);
+  if(isLongTime){
+    setMainTime(props.longTime);
+    finish.play()
+  }else{
+    setMainTime(props.shortTime);
+    finish.play()
+
+  }
+}
+
 useEffect(() =>{
+
   if(working){
     document.body.classList.add("working")
   }
@@ -33,7 +52,20 @@ useEffect(() =>{
     document.body.classList.remove("working")
   }
 
-}, [working,resting]);
+  if(mainTime > 0) return;
+
+  if(working && cycles.length > 0){
+    configureRestingTime(false);
+    cycles.pop();
+  }else if(working && cycles.length <= 0){
+   configureRestingTime(true);
+   setCycles(new Array(props.cycles -1).fill(true))
+   setCyclesQtd(cyclesQtd +1);
+  }
+
+  if(resting) configureTime();
+
+}, [working,resting,mainTime,configureRestingTime, props.cycles, ]);
 
 useInterval(() =>{
 setMainTime(mainTime -1)
@@ -48,18 +80,7 @@ const configureTime = () =>{
   start.play();
 }
 
-const configureRestingTime = (isLongTime:boolean) =>{
-  setRunning(true);
-  setResting(true);
-  if(isLongTime){
-    setMainTime(props.longTime);
-    finish.play()
-  }else{
-    setMainTime(props.shortTime);
-    finish.play()
 
-  }
-}
 
 
 const playPause = () =>{
@@ -81,7 +102,7 @@ return (
     </div>
 
     <div className='notes__container'>
-      <p>testando testando testando</p>
+      <p>Ciclos: {cyclesQtd}</p>
       <p>testando testando testando</p>
       <p>testando testando testando</p>
       <p>testando testando testando</p>

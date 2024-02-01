@@ -4,9 +4,11 @@ function App() {
 
   return (
    <div className='container'> 
-    <Pomo pomodoroTime={500}
-    shortTime={200}
-    longTime={300}/>
+    <Pomo pomodoroTime={10}
+    shortTime={4}
+    longTime={6}
+    cycles={4}
+    />
   </div>
   )
 }
