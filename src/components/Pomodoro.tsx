@@ -33,6 +33,7 @@ const pause = new Audio(pauseSong);
 const configureRestingTime = (isLongTime:boolean) =>{
   setRunning(true);
   setResting(true);
+  setWorking(false);
   if(isLongTime){
     setMainTime(props.longTime);
     finish.play()
@@ -58,6 +59,7 @@ useEffect(() =>{
     configureRestingTime(false);
     cycles.pop();
   }else if(working && cycles.length <= 0){
+    console.log(cycles.length)
    configureRestingTime(true);
    setCycles(new Array(props.cycles -1).fill(true))
    setCyclesQtd(cyclesQtd +1);
@@ -81,8 +83,6 @@ const configureTime = () =>{
 }
 
 
-
-
 const playPause = () =>{
   setRunning(!running);
   pause.play();
@@ -103,7 +103,7 @@ return (
 
     <div className='notes__container'>
       <p>Ciclos: {cyclesQtd}</p>
-      <p>testando testando testando</p>
+      <p>Tempo Trabalhado: </p>
       <p>testando testando testando</p>
       <p>testando testando testando</p>
     </div>
