@@ -8,6 +8,7 @@ import finishSong from "../sounds/bell-finish.mp3"
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 import startSong from '../sounds/bell-start.mp3'
 import pauseSong from '../sounds/bell-pause.mp3'
+import { convertTime } from '../utils/convertTime';
 
 interface typeProps{
   pomodoroTime:number;
@@ -15,6 +16,7 @@ interface typeProps{
   longTime:number;
   cycles:number;
 }
+
 
 function Pomo(props:typeProps) {
 const [mainTime, setMainTime] = useState(props.pomodoroTime);
@@ -25,6 +27,8 @@ const [cycles, setCycles] = useState(
   new Array(props.cycles -1).fill(true)
 )
 const [cyclesQtd, setCyclesQtd] = useState(0);
+const [numberOfPomodoros, setNumberOfPomodoros ] = useState(0);
+const [timeWorked, setTimeWorked] = useState(0);
 
 const finish = new Audio(finishSong);
 const start = new Audio(startSong);
@@ -56,6 +60,7 @@ useEffect(() =>{
   if(mainTime > 0) return;
 
   if(working && cycles.length > 0){
+    setNumberOfPomodoros(numberOfPomodoros+1);
     configureRestingTime(false);
     cycles.pop();
   }else if(working && cycles.length <= 0){
@@ -71,6 +76,9 @@ useEffect(() =>{
 
 useInterval(() =>{
 setMainTime(mainTime -1)
+if(working){
+ setTimeWorked(timeWorked+1);
+}
 }, running ? 1000 : null)
 
 const configureTime = () =>{
@@ -90,7 +98,7 @@ const playPause = () =>{
 
 return (
   <div className='pomodoro'>
-    <h4>Você está: em ação</h4>
+    <h4>{working ? "Estude !" : "Descanse"}</h4>
     <Timer mainTime={mainTime}/>
 
     <div className="controls">
@@ -103,9 +111,8 @@ return (
 
     <div className='notes__container'>
       <p>Ciclos: {cyclesQtd}</p>
-      <p>Tempo Trabalhado: </p>
-      <p>testando testando testando</p>
-      <p>testando testando testando</p>
+      <p>Tempo de estudo: {convertTime(timeWorked)} </p>
+      <p>Numero de pomodoros: {numberOfPomodoros}</p>
     </div>
    
 </div>
