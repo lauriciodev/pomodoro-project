@@ -1,5 +1,6 @@
 import Pomo from './components/Pomodoro';
-import MyFooter from "./components/MyFooter";
+import { FaHeart } from "react-icons/fa";
+
 
 function App() {
 
@@ -13,7 +14,10 @@ function App() {
     />
 
   </div>
-   <MyFooter/>
+  <footer className='footer__container'>
+       <p>copyrigth Todos os Direitos Reservados</p>
+       <p>Feito com <FaHeart color='red' /> por <a href="http://masterlauricio.netlify.app">Lauricio De Sousa </a></p>
+    </footer>
 
     </>
 
