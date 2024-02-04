@@ -63,6 +63,14 @@ display: none;
   background-color: rgb(5, 136, 136);
 }
 
+.pomodoro .status__img{
+  width: 100%;
+  max-width: 200px;
+  margin: 10px auto;
+  display: block;
+  border-radius: 20%;
+}
+
 .container .notes__container{
   padding: 10px;
   margin-top: 20px;

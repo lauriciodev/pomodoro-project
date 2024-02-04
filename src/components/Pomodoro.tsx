@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { useInterval } from '../hooks/useIterval';
 import Button from './button';
 import Timer from './timer';
+import descanse from "../assets/pic/descanse.gif";
+import estude from "../assets/pic/estude.gif";
 import "../App.css"
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 import finishSong from "../sounds/bell-finish.mp3"
@@ -98,17 +100,25 @@ const playPause = () =>{
 
 return (
   <div className='pomodoro'>
-    <h4>{working ? "Estude !" : "Descanse"}</h4>
-    <Timer mainTime={mainTime}/>
+    {running ? (
+    <>
+      <h4>{working ? "Estude !" : "Descanse"}</h4>
+      <Timer mainTime={mainTime}/>
+    </>
+  ) : "" }
+    
 
     <div className="controls">
-    <Button className='button' clickFunction={() => configureTime()} text='Trabalho'/>
-   <Button className='button' clickFunction={() => configureRestingTime(true)} text='Descanso'/>
+    <Button className='button' clickFunction={() => configureTime()} text='Iniciar Estudos'/>
+   <Button className='button' clickFunction={() => configureRestingTime(true)} text='Iniciar Descanso'/>
    <Button className={!working && !resting ? "hidden": "button"} clickFunction={() => playPause() } text={
     running ? "Pause" : "Play"
    }/>
     </div>
-
+ 
+    {running ? (
+     <img className='status__img' src={working ? estude : descanse}/>) :""
+    }
     <div className='notes__container'>
       <p>Ciclos: {cyclesQtd}</p>
       <p>Tempo de estudo: {convertTime(timeWorked)} </p>
