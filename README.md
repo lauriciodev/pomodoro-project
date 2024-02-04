@@ -1,4 +1,3 @@
-rapaz isso aqui é um pomodoro!
-tu sabe oque é um pomodoro?
-
-se tu nao sabe, pois vai pesquisar no google 
+pomodoro for Lauricio De Sousa,
+version: 0.0.1
+date: 04/02/24
